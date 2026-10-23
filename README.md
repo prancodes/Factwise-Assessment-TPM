@@ -2,17 +2,16 @@
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/Live_Deployment-Vercel-black?style=for-the-badge&logo=vercel)](https://factwise-assessment-tpm.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Deployment-Vercel-black?style=for-the-badge&logo=vercel)](https://quarantinecare-live.vercel.app/)
 [![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 ### **Technical Product Manager (TPM) Assessment Solution**
 **Author:** Pranjal Singh (23-ITC27-27)  
 **Evaluation Target:** FactWise Assessment  
-**Live URL:** [https://factwise-assessment-tpm.vercel.app](https://factwise-assessment-tpm.vercel.app)
+**Live URL:** [https://quarantinecare-live.vercel.app](https://quarantinecare-live.vercel.app)
 
 </div>
 
@@ -36,20 +35,20 @@ The virus has an expected **15% mortality rate** (target recovery rate: **85%**)
 ## 🔄 Clinical Workflow & System Architecture
 
 ```mermaid
-graph TD
-    A[Patient Admitted to Bed 1..74] --> B[Nurse Daily Triage Queue]
-    B -->|Nurse Records Morning Temp| C{Temperature Check}
-    C -->|Fever >= 99.5 F| D[Streak Resets to 0 Days]
-    C -->|Normal < 99.5 F| E[Streak Increments +1 Day]
-    D --> F[Doctor Rounds Queue]
+flowchart TD
+    A["Patient Admitted (Beds 1-74)"] --> B["Nurse Daily Triage Queue"]
+    B -->|"Nurse Records Morning Temp"| C{"Temperature Check"}
+    C -->|"Fever (99.5°F or above)"| D["Streak Resets to 0 Days"]
+    C -->|"Normal (Below 99.5°F)"| E["Streak Increments (+1 Day)"]
+    D --> F["Doctor Rounds Queue"]
     E --> F
-    F -->|Doctor Conducts Round & Evaluates| G{Consecutive Fever-Free Days?}
-    G -->|< 3 Days| H[Continue Regimen & Daily Monitoring]
+    F -->|"Doctor Evaluates Patient"| G{"Consecutive Fever-Free Days"}
+    G -->|"Under 3 Days"| H["Continue Regimen & Daily Monitoring"]
     H --> B
-    G -->|== 3 Full Days| I[Doctor Authorizes Discharge Recommendation]
-    I --> J[Immediate Admin Bed Turnover Queue]
-    J -->|Admin Executes Formal Discharge| K[Bed Sanitized & Released]
-    K --> L[Vacant Bed Available for Intake <= 74 Limit]
+    G -->|"3 Full Days (Cured)"| I["Doctor Authorizes Discharge"]
+    I --> J["Admin Bed Turnover Queue"]
+    J -->|"Admin Executes Formal Discharge"| K["Bed Sanitized & Released"]
+    K --> L["Bed Available for New Admission"]
 ```
 
 ---
@@ -128,6 +127,6 @@ npm run build
 
 ## 🌐 Live Platform
 
-* **Production URL:** [https://factwise-assessment-tpm.vercel.app](https://factwise-assessment-tpm.vercel.app)
+* **Production URL:** [https://quarantinecare-live.vercel.app](https://quarantinecare-live.vercel.app)
 * **GitHub Repository:** [https://github.com/prancodes/Factwise-Assessment-TPM](https://github.com/prancodes/Factwise-Assessment-TPM)
 * **Author:** Pranjal Singh (23-ITC27-27)
