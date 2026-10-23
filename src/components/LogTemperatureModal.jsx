@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   Thermometer, 
   AlertTriangle, 
@@ -54,22 +55,22 @@ export default function LogTemperatureModal({
     onClose();
   };
 
-  return (
+  return createPortal(
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ padding: '1.75rem' }}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         
         {/* Top Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem', gap: '0.75rem' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
               <span style={{ background: '#1e293b', color: '#38bdf8', padding: '0.2rem 0.55rem', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 800 }}>
                 Room {patient.roomNumber}
               </span>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>
                 Log Patient Temperature
               </h3>
             </div>
-            <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '0.25rem' }}>
+            <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '0.25rem' }}>
               {patient.name} • {patient.age}y • {patient.gender} • Day {patient.admittedDaysAgo} in Quarantine
             </p>
           </div>
@@ -77,7 +78,8 @@ export default function LogTemperatureModal({
           <button 
             onClick={onClose}
             className="btn btn-secondary"
-            style={{ padding: '0.35rem 0.5rem', borderRadius: '50%' }}
+            style={{ padding: '0.4rem 0.55rem', borderRadius: '50%', flexShrink: 0 }}
+            aria-label="Close modal"
           >
             <X size={16} />
           </button>
@@ -245,7 +247,7 @@ export default function LogTemperatureModal({
                     }
                   }}
                   className="btn btn-secondary"
-                  style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem' }}
+                  style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem', minHeight: '36px' }}
                 >
                   {preset}°F {preset >= FEVER_THRESHOLD_F ? '🔥' : '🌱'}
                 </button>
@@ -277,7 +279,7 @@ export default function LogTemperatureModal({
           </div>
 
           {/* Footer Actions */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.6rem' }}>
+          <div className="modal-footer-actions">
             <button 
               type="button"
               onClick={onClose}
@@ -300,6 +302,7 @@ export default function LogTemperatureModal({
         </form>
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

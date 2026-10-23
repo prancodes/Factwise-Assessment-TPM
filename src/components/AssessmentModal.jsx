@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   X, 
   FileText, 
@@ -61,41 +62,42 @@ export default function AssessmentModal({ onClose }) {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  return (
+  return createPortal(
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content modal-content-lg" onClick={(e) => e.stopPropagation()} style={{ padding: '2rem', maxHeight: '94vh' }}>
+      <div className="modal-content modal-content-lg" onClick={(e) => e.stopPropagation()} style={{ maxHeight: '94vh' }}>
         
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', borderBottom: '1px solid #1f293d', paddingBottom: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', borderBottom: '1px solid #1f293d', paddingBottom: '0.85rem', gap: '0.75rem' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ background: '#7c3aed', color: '#fff', padding: '0.2rem 0.55rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 800 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <span style={{ background: '#7c3aed', color: '#fff', padding: '0.2rem 0.55rem', borderRadius: '6px', fontSize: '0.72rem', fontWeight: 800 }}>
                 FactWise TPM Assessment
               </span>
-              <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#f8fafc' }}>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#f8fafc' }}>
                 Technical Product Manager Solutions (Q1 – Q4)
               </h2>
             </div>
-            <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.2rem' }}>
-              Candidate: <strong>Pranjal</strong> • Assessment Target: Virus Quarantine & Treatment Facility
+            <p style={{ fontSize: '0.78rem', color: '#94a3b8', marginTop: '0.2rem' }}>
+              Candidate: <strong>Pranjal Jaykumar Singh</strong> • Roll No: <strong>23-ITC27-27</strong>
             </p>
           </div>
 
           <button 
             onClick={onClose}
             className="btn btn-secondary"
-            style={{ padding: '0.4rem 0.55rem', borderRadius: '50%' }}
+            style={{ padding: '0.4rem 0.55rem', borderRadius: '50%', flexShrink: 0 }}
+            aria-label="Close modal"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Tab Switcher */}
-        <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '1.5rem', background: '#0b111e', padding: '0.35rem', borderRadius: '10px', border: '1px solid #1f293d', flexWrap: 'wrap' }}>
+        <div className="assessment-tabs-scrollable">
           <button 
             onClick={() => setActiveTab('q1')}
             className={`btn ${activeTab === 'q1' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '0.8rem', padding: '0.4rem 0.85rem' }}
+            style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
           >
             Q1: User Types & Roles
           </button>
@@ -103,7 +105,7 @@ export default function AssessmentModal({ onClose }) {
           <button 
             onClick={() => setActiveTab('q2')}
             className={`btn ${activeTab === 'q2' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '0.8rem', padding: '0.4rem 0.85rem' }}
+            style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
           >
             Q2: Prototype & Workflow
           </button>
@@ -111,7 +113,7 @@ export default function AssessmentModal({ onClose }) {
           <button 
             onClick={() => setActiveTab('q3')}
             className={`btn ${activeTab === 'q3' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '0.8rem', padding: '0.4rem 0.85rem' }}
+            style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
           >
             Q3: Logical Constraints
           </button>
@@ -119,16 +121,16 @@ export default function AssessmentModal({ onClose }) {
           <button 
             onClick={() => setActiveTab('q4')}
             className={`btn ${activeTab === 'q4' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '0.8rem', padding: '0.4rem 0.85rem' }}
+            style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
           >
             <Calculator size={14} />
-            Q4: Sprint Knapsack Solution
+            Q4: Knapsack Solution
           </button>
 
           <button 
             onClick={() => setActiveTab('export')}
             className={`btn ${activeTab === 'export' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ fontSize: '0.8rem', padding: '0.4rem 0.85rem', marginLeft: 'auto' }}
+            style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
           >
             <Copy size={14} />
             Submission Export
@@ -147,7 +149,7 @@ export default function AssessmentModal({ onClose }) {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
               {/* Nurse Card */}
               <div style={{ background: '#131b2c', border: '1px solid #1e293b', borderRadius: '10px', padding: '1.1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.65rem' }}>
@@ -211,7 +213,7 @@ export default function AssessmentModal({ onClose }) {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div className="responsive-two-col">
               <div style={{ background: '#131b2c', padding: '1rem', borderRadius: '10px', border: '1px solid #1e293b' }}>
                 <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#34d399', marginBottom: '0.5rem' }}>
                   Demonstrated Core Workflows:
@@ -306,7 +308,7 @@ export default function AssessmentModal({ onClose }) {
                   </p>
                 </div>
 
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                   <button 
                     onClick={() => setSelectedFeatures(OPTIMAL_IDS)}
                     className="btn btn-success"
@@ -368,8 +370,8 @@ export default function AssessmentModal({ onClose }) {
             </div>
 
             {/* Feature Selection Table */}
-            <div style={{ maxHeight: '280px', overflowY: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', textAlign: 'left' }}>
+            <div className="table-responsive" style={{ maxHeight: '280px', overflowY: 'auto' }}>
+              <table style={{ width: '100%', minWidth: '540px', borderCollapse: 'collapse', fontSize: '0.8rem', textAlign: 'left' }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid #1f293d', color: '#94a3b8' }}>
                     <th style={{ padding: '0.5rem' }}>Include</th>
@@ -548,6 +550,7 @@ Replacing low-ROI Feature C (effort 5, value 6) with high-density Medium & Low f
         )}
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

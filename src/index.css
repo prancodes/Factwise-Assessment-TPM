@@ -39,6 +39,11 @@
   padding: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-main);
@@ -54,8 +59,8 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #0b0f19;
@@ -105,14 +110,16 @@ body {
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.9rem;
   border-radius: 8px;
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  touch-action: manipulation;
+  min-height: 38px;
 }
 
 .btn:active {
@@ -179,12 +186,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   padding: 0.2rem 0.55rem;
   border-radius: 6px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 
 .badge-normal {
@@ -241,13 +249,14 @@ body {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(3, 7, 18, 0.78);
+  background: rgba(3, 7, 18, 0.82);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: 1rem;
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -260,8 +269,294 @@ body {
   max-height: 92vh;
   overflow-y: auto;
   position: relative;
+  margin: auto;
 }
 
 .modal-content-lg {
   max-width: 960px;
+}
+
+/* Table Responsive Container */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT CLASSES & MEDIA QUERIES
+   ========================================================================== */
+
+/* Header Responsiveness */
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.header-tabs-container {
+  display: flex;
+  background: #0b111e;
+  padding: 0.3rem;
+  border-radius: 10px;
+  border: 1px solid #1f293d;
+  gap: 0.25rem;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* KPI Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Ward 74-Bed Grid */
+.ward-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.85rem;
+}
+
+/* 2-Column Split Layout (Nurse Station & Admin Desk) */
+.two-column-split {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Doctor Rounds Grid */
+.doctor-rounds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+/* Modal Inner Columns */
+.modal-split-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Horizontal Scrolling Filter Bar */
+.filter-bar-scrollable {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.4rem;
+  scrollbar-width: none;
+}
+.filter-bar-scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+/* Horizontal Scrolling Assessment Tabs */
+.assessment-tabs-scrollable {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  background: #0b111e;
+  padding: 0.35rem;
+  border-radius: 10px;
+  border: 1px solid #1f293d;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.assessment-tabs-scrollable::-webkit-scrollbar {
+  display: none;
+}
+.assessment-tabs-scrollable button {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Responsive 2-Col Grid */
+.responsive-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Modal Footer Actions */
+.modal-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   BREAKPOINTS: TABLET (<= 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .app-container {
+    padding: 1rem 1.25rem 2.5rem 1.25rem;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .two-column-split {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .header-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+
+  .header-brand {
+    justify-content: space-between;
+  }
+
+  .header-tabs-container {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINTS: MOBILE LANDSCAPE & SMALL TABLETS (<= 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0.85rem 0.85rem 2rem 0.85rem;
+  }
+
+  .modal-split-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .responsive-two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-rounds-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content, .modal-content-lg {
+    padding: 1.25rem !important;
+    max-height: 94vh;
+  }
+
+  .modal-footer-actions {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+
+  .modal-footer-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINTS: MOBILE PORTRAIT (<= 640px)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .app-container {
+    padding: 0.6rem 0.6rem 2rem 0.6rem;
+  }
+
+  .kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .ward-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .glass-panel {
+    border-radius: 12px;
+    padding: 1rem !important;
+  }
+
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-content, .modal-content-lg {
+    padding: 1rem !important;
+    border-radius: 14px;
+    max-height: 95vh;
+  }
+
+  .header-tabs-container button {
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.65rem !important;
+  }
+
+  .header-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+  }
+
+  .header-actions .btn,
+  .header-actions div {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.75rem !important;
+    padding: 0.4rem !important;
+  }
+
+  .search-wrapper-mobile {
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINTS: EXTRA SMALL PHONES (<= 400px)
+   ========================================================================== */
+@media (max-width: 400px) {
+  .app-container {
+    padding: 0.5rem 0.5rem 1.75rem 0.5rem;
+  }
+
+  .header-brand h1 {
+    font-size: 1.1rem !important;
+  }
+
+  .header-actions {
+    grid-template-columns: 1fr;
+  }
 }
